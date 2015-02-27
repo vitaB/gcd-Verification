@@ -1,0 +1,51 @@
+module
+
+  export nat-prime
+
+  refinement
+
+     representation of operations
+     	eggT implements gcd;
+     	dist implements dist;
+     	prime implements prime;
+     	prime1 implements |;
+
+
+     (: clauses of the form 'eproc : exportsort;' where eproc implements equality
+        i.e. eproc should have mode (importsort,importsort) : bool :)
+     (: equality :)
+
+     (: clauses of the form 'rproc : exportsort;' where rproc gives a restriction
+        which import data are used as representation of export
+        i.e. rproc should have mode (importsort) : bool :)
+     (: restriction :)
+
+     (: clauses of the form 'uproc : exportsort;' for every generated export sort
+        uproc should have mode (importsort) : bool :)
+     (: uniform restriction :)
+
+     implementation
+
+     import nat-div
+	
+     (: auxiliary signature for the implementation :)
+
+     (: procedures :)
+
+     (: variables :)
+
+     declaration
+     	eggT(n0, n1; m) {
+     		if (n1 ≠ 0) then {
+     			if (n0 % n1 = 0) then {
+     				m := n1
+     			} else {
+     				eggT(n1, n0 % n1; m)
+     			}
+     		} else {
+     			m := n0;
+     		}
+     			
+     	}
+
+end module

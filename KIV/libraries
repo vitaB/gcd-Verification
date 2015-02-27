@@ -1,0 +1,6 @@
+nat-prime      spec     lib-basic
+nat-div        spec     lib-basic
+nat-mult       spec     lib-basic
+nat            spec     lib-basic
+nat-basic2     spec     lib-basic
+nat-basic1     spec     lib-basic

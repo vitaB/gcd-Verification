@@ -1,0 +1,59 @@
+module
+
+  export nat-prime
+
+  refinement
+	representation of operations
+     	ggT implements gcd;
+     	dist implements dist;
+     	prime implements prime;
+     	prime1 implements |;
+     	
+     (: clauses of the form 'importsort implements exportsort;' :)
+     (: representation of sorts :)
+
+
+     (: clauses of the form 'proc implements exportop;':)
+     (: representation of operations :)
+
+
+     (: clauses of the form 'eproc : exportsort;' where eproc implements equality
+        i.e. eproc should have mode (importsort,importsort) : bool :)
+     (: equality :)
+
+     (: clauses of the form 'rproc : exportsort;' where rproc gives a restriction
+        which import data are used as representation of export
+        i.e. rproc should have mode (importsort) : bool :)
+     (: restriction :)
+
+     (: clauses of the form 'uproc : exportsort;' for every generated export sort
+        uproc should have mode (importsort) : bool :)
+     (: uniform restriction :)
+
+     implementation
+
+     import nat-div
+
+     (: auxiliary signature for the implementation :)
+
+     (: procedures :)
+
+     (: variables :)
+
+     declaration
+     	ggT(n0, n1; m) {
+     		if n1 > n0 
+     		then ggT(n1, n0 ; m)
+     		else {
+			if n1 ≠ 0
+            	then if n0 % n1 = 0
+                     then m := n1
+                     else ggT(n1, n0 % n1; m)
+             else m := n0
+             }
+     			
+     	}
+
+
+
+end module
