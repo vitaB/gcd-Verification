@@ -1,0 +1,21 @@
+enrich nat-pot
+with
+
+;; sorts ;
+
+;; constants ;
+
+functions
+	. sqr . : nat × nat → nat prio 12 right;
+
+;; predicates ;
+
+;; variables ;
+
+;; induction ;
+
+axioms
+	⊦ m ≠ 0 → m sqr n = n ^ (1 / m);
+	⊦ n ≠ 0 → (m sqr n) ^ m = n;
+
+end enrich

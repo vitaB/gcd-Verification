@@ -1,0 +1,24 @@
+enrich vector-data with
+
+;; sorts ;
+
+constants
+	O : vector;
+functions
+	. + . : vector × vector -> vector;
+	. - . : vector × vector -> vector prio 8 left;
+	;;abs : vector -> nat; ;; TODO
+;; predicates ;
+
+;; variables ;
+
+;; induction ;
+
+	axioms
+		Null-Vector: # v = # O ⊦ v = O ↔ ∀ n. n < # v → v[n] = 0;
+		size-Addition : # v0 = # v1 ⊦ # v1 = # (v0 + v1);
+		size-Subtraktion : # v0 = # v1 ⊦ # v1 = # (v0 - v1);
+		Addition : # v0 = # v1 ⊦ ∀ n. n < # v0 -> (v0 + v1)[n] = v0[n] + v1[n];
+		Subtraktion : # v0 = # v1 ⊦ ∀ n. n < # v0 -> (v0 - v1)[n] = v0[n] - v1[n];
+
+end enrich

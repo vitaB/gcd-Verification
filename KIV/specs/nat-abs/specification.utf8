@@ -1,0 +1,19 @@
+enrich nat-sqr with
+
+;; sorts ;
+
+;; constants ;
+
+functions
+	abs : nat → nat;
+
+;; predicates ;
+
+;; variables ;
+
+;; induction ;
+
+axioms
+	⊦ n ≥ 0 ↔ n = abs(n);
+
+end enrich

@@ -1,0 +1,19 @@
+enrich vector with
+
+;; sorts ;
+
+;; constants ;
+
+functions
+	. * . : nat × vector -> vector prio 10 right;
+
+;; predicates ;
+
+;; variables ;
+
+;; induction ;
+
+axioms
+	Skalar-Multiplikation : # v0 = # v1 ⊦ m * v0 = v1 ↔ ∀ n. n < # v0 -> m * v0[n] = v1[n];
+
+end enrich

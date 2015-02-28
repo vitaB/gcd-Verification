@@ -1,0 +1,11 @@
+rename array-new by morphism
+
+	array -> vector;
+	mkarray -> mkvector;
+	ar -> v;
+	ar0 -> v0;
+	ar1 -> v1;
+	ar2 -> v2
+	
+
+end rename
