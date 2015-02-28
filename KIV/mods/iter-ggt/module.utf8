@@ -52,9 +52,11 @@ module
 	            			n1 := rest;
 	            			rest := n0 % n1;
 	            		};
+	            		m := n1
 	            	}
-            	};
-            	m := n0
+            	} else {
+            		m := n0
+            	}
              }
      			
      	}
