@@ -3,6 +3,8 @@ Require Import Bool.
 Require Import Coq.Numbers.Natural.Peano.NPeano.
 Require Import Coq.Arith.Compare_dec.
 Require Import Coq.Numbers.Natural.Abstract.NDiv.
+Require Import Omega.
+
 Open Scope nat_scope.
 
 (* ggT(n,m) = ggT(m, n)
@@ -36,18 +38,36 @@ Proof.
 Qed.
 Hint Resolve ggT_n_1.
 
+Lemma ggT_same : forall m n : nat, m = n -> eggT n m = n.
+Proof.
+  intros m n H; rewrite H. induction n.
+    reflexivity.
+     rewrite eggT_equation. rewrite Nat.mod_same.
+        reflexivity. pose Nat.neq_succ_0. apply n0.
+Qed.
+
+Lemma ggt_mod : forall n m, m > 0 -> eggT n m = eggT (n mod m) m.
+Proof.
+  induction m; intro. exfalso. omega. destruct m.
+    rewrite  ggT_n_1; reflexivity.
+    assert (S m >= 1) by omega. intuition.
+Qed.
+
 Theorem ggT_kom : forall n m : nat, eggT n m = eggT m n.
 Proof.
-  intros. pose ggT_0 as H1. induction m.
-    apply H1. reflexivity. (*  induction m. simpl. rewrite ggT_n_1; reflexivity. *)
-    rewrite eggT_equation. induction m. rewrite eggT_equation. 
-    admit.
+  intros; pose ggT_0 as H1; induction m.
+    apply H1; reflexivity.
+    rewrite eggT_equation; rewrite eggT_equation; rewrite <- eggT_equation.
+      apply ggt_mod. generalize m. simple induction m0.
+        apply Nat.lt_0_1.
+        intros. apply Lt.lt_S. exact H.
 Qed.
 
 Theorem ggT_impl : forall n m : nat, n >= m -> eggT n m = eggT (n - m) m.
 Proof.
-  intros n m H. induction m.
-    rewrite <- Minus.minus_n_O. trivial.
+  intros; induction m.
+    rewrite <- Minus.minus_n_O; reflexivity.
+    
     admit.
 Qed.
 
