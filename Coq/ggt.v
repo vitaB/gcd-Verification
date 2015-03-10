@@ -5,13 +5,12 @@ Require Import Coq.Arith.Compare_dec.
 Require Import Coq.Numbers.Natural.Abstract.NDiv.
 Open Scope nat_scope.
 
-
 (* ggT(n,m) = ggT(m, n)
 ggT(0,n) = n
 n >= m -> ggT(n, m) = ggT(n - m, n)
  *)
 
-Fixpoint eggT ( a b : nat) : nat :=
+Function eggT ( a b : nat) : nat :=
 match a with
    | 0 => b
    | S a' => eggT(b mod S a')  (S a')
@@ -23,18 +22,25 @@ Proof.
   simpl. reflexivity.
   simpl. rewrite Minus.minus_diag. simpl. reflexivity.
 Qed.
-Lemma ggT_1 : forall m n : nat, m = 1 -> (eggT n m) = 1.
-Proof.
-  intros m n H. rewrite H. induction n.
+Hint Resolve ggT_0.
+Lemma ggT_n_1 : forall m n : nat, m = 1 -> (eggT n m) = 1.
+Proof. 
+  intros m n H; rewrite H; induction n.
     simpl. reflexivity.
-    admit.
+    rewrite eggT_equation. induction n. 
+      simpl. reflexivity.
+      rewrite Nat.mod_1_l.
+        simpl. reflexivity.
+        generalize n. simple induction n0. apply Nat.lt_1_2.
+        intros. apply Lt.lt_S. exact H0.
 Qed.
+Hint Resolve ggT_n_1.
 
 Theorem ggT_kom : forall n m : nat, eggT n m = eggT m n.
 Proof.
   intros. pose ggT_0 as H1. induction m.
-    apply H1. reflexivity.
-    simpl. 
+    apply H1. reflexivity. (*  induction m. simpl. rewrite ggT_n_1; reflexivity. *)
+    rewrite eggT_equation. induction m. rewrite eggT_equation. 
     admit.
 Qed.
 
