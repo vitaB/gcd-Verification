@@ -22,6 +22,7 @@ init {
   run ggT(a, b, child);
   child?result;
   printf("teiler: %d\n", result);
+  //assert(if a >= b -> ggT(a - b, b) = ggT(a, b))
   //assert(ggT(a,b) = ggT(b,a));
   // zu Beweisen http://de.wikipedia.org/wiki/Gr%C3%B6%C3%9Fter_gemeinsamer_Teiler#Rechenregeln
 }

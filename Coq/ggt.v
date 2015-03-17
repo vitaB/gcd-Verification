@@ -50,10 +50,17 @@ Lemma ggt_mod : forall n m, m > 0 -> eggT n m = eggT (n mod m) m.
 Proof.
   induction m; intro. exfalso. omega. destruct m.
     rewrite  ggT_n_1; reflexivity.
-    assert (S m >= 1) by omega. intuition.
+    assert (S m >= 1) by omega. intuition. admit.
 Qed.
 
 Theorem ggT_kom : forall n m : nat, eggT n m = eggT m n.
+Proof.
+  intros. induction m. simpl. apply ggT_0. trivial.
+    rewrite eggT_equation. rewrite eggT_equation. rewrite <- eggT_equation.
+      apply ggt_mod. apply gt_Sn_O. SearchAbout( S _ > 0).
+Qed.
+
+Theorem ggT_kom1 : forall n m : nat, eggT n m = eggT m n.
 Proof.
   intros; pose ggT_0 as H1; induction m.
     apply H1; reflexivity.
