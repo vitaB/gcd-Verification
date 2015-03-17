@@ -47,10 +47,18 @@ Proof.
 Qed.
 
 Lemma ggt_mod : forall n m, m > 0 -> eggT n m = eggT (n mod m) m.
-Proof.
-  induction m; intro. exfalso. omega. destruct m.
-    rewrite  ggT_n_1; reflexivity.
-    assert (S m >= 1) by omega. intuition. admit.
+Proof. 
+  induction m; intro.
+    (*start with 1 not with 0*)  
+    exfalso; omega.
+  assert ( n = S m \/ n < S m \/ n > S m).
+     omega.
+  destruct H0 as [H01 | [H02 | H03] ].
+    rewrite H01; rewrite Nat.mod_same by omega; rewrite ggT_same by omega; reflexivity.
+    rewrite Nat.mod_small; omega.
+    destruct n.
+      omega.
+      rewrite eggT_equation. rewrite Nat.mod_small by omega. rewrite eggT_equation. trivial.
 Qed.
 
 Theorem ggT_kom : forall n m : nat, eggT n m = eggT m n.
@@ -73,10 +81,22 @@ Qed.
 Theorem ggT_impl : forall n m : nat, n >= m -> eggT n m = eggT (n - m) m.
 Proof.
   intros; induction m.
-    rewrite <- Minus.minus_n_O; reflexivity.
+    rewrite <- Minus.minus_n_O; reflexivity. 
     
     admit.
 Qed.
+
+
+
+
+
+
+
+
+
+
+
+
 
 Section Zahlentheorie.
 Variables a b c r: nat.
