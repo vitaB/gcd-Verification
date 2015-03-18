@@ -4,11 +4,11 @@ proctype ggT(int a; int b; chan p) {
   chan child = [1] of { int };
   
   if
-    :: a == 0 -> p!b
     :: b == 0 -> p!a
-    :: else -> int rest = a % b; if
-      :: rest == 0 -> p!b
-      :: else -> run ggT(b, rest, child); child?result; p!result /*communicating the result*/
+    :: b != 0 -> if
+      :: a % b == 0 -> p!b
+      :: else -> run ggT(b, a % b, child);
+          child?result; p!result /*communicating the result*/
     fi
   fi
 }
@@ -16,13 +16,20 @@ proctype ggT(int a; int b; chan p) {
 init {
   chan child = [1] of { int };
   int result;
-  byte a, b;
-  select (a : 0 .. 15);
-  select (b : 0 .. 10);
+  chan child1 = [1] of { int };
+  int result1;
+  int a, b;
+  select (a : 0 .. 25);
+  select (b : 0 .. 25);
   run ggT(a, b, child);
   child?result;
-  printf("teiler: %d\n", result);
-  //assert(if a >= b -> ggT(a - b, b) = ggT(a, b))
-  //assert(ggT(a,b) = ggT(b,a));
-  // zu Beweisen http://de.wikipedia.org/wiki/Gr%C3%B6%C3%9Fter_gemeinsamer_Teiler#Rechenregeln
+  
+  run ggT(b, a, child1);
+  child1?result1;
+  assert(result == result1);
+
+  if
+    :: a >= b -> run ggT(a - b, b, child1); child1?result1;
+       assert(result == result1);
+  fi
 }
