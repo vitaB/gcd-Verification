@@ -1,0 +1,18 @@
+theory ggt
+imports Main
+begin
+fun ggt :: "nat \<Rightarrow> nat \<Rightarrow> nat" where
+  "ggt 0 m = m"
+  | "ggt n m = ggt(m mod n) n"
+
+theorem ggt_o : "ggt m 0 = m"
+apply(induction m)
+apply(simp)
+apply(simp)
+
+theorem ggt_kom : "ggt m n = ggt n m"
+apply(induction m)
+apply(simp)
+end
+
+
