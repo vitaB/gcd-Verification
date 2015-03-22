@@ -29,11 +29,11 @@ Lemma ggT_n_1 : forall m n : nat, m = 1 -> (eggT n m) = 1.
 Proof. 
   intros m n H; rewrite H; induction n.
     simpl. reflexivity.
-    rewrite eggT_equation. induction n. 
-      simpl. reflexivity.
-      rewrite Nat.mod_1_l.
-        simpl. reflexivity.
-        generalize n. simple induction n0. apply Nat.lt_1_2.
+    rewrite eggT_equation. case n. 
+      simpl; reflexivity.
+      intros. rewrite Nat.mod_1_l.
+        simpl; reflexivity.
+        generalize n0. simple induction n1. apply Nat.lt_1_2.
         intros. apply Lt.lt_S. exact H0.
 Qed.
 Hint Resolve ggT_n_1.
@@ -45,19 +45,19 @@ Proof.
      rewrite eggT_equation. rewrite Nat.mod_same.
         reflexivity. pose Nat.neq_succ_0. apply n0.
 Qed.
+Hint Resolve ggT_same.
 
 Lemma ggt_mod : forall n m, m > 0 -> eggT n m = eggT (n mod m) m.
 Proof. 
   induction m; intro.
     (*start with 1 not with 0*)  
     exfalso; omega.
-  assert ( n = S m \/ n < S m \/ n > S m).
-     omega.
+  assert ( n = S m \/ n < S m \/ n > S m) by omega.
   destruct H0 as [H01 | [H02 | H03] ].
     rewrite H01; rewrite Nat.mod_same by omega; rewrite ggT_same by omega; reflexivity.
     rewrite Nat.mod_small; omega.
     destruct n.
-      omega.
+      exfalso; omega.
       rewrite eggT_equation. rewrite Nat.mod_small by omega. rewrite eggT_equation. trivial.
 Qed.
 
@@ -72,18 +72,29 @@ Theorem ggT_kom1 : forall n m : nat, eggT n m = eggT m n.
 Proof.
   intros; pose ggT_0 as H1; induction m.
     apply H1; reflexivity.
-    rewrite eggT_equation; rewrite eggT_equation; rewrite <- eggT_equation.
-      apply ggt_mod. generalize m. simple induction m0.
-        apply Nat.lt_0_1.
-        intros. apply Lt.lt_S. exact H.
+    symmetry; rewrite eggT_equation. rewrite <- ggt_mod; trivial.
+      generalize m. simple induction m0.
+      apply Nat.lt_0_1.
+      intros. apply Lt.lt_S. exact H.
+Qed.
+
+Lemma mod_minus : forall n m : nat, n>=m /\ m <> 0 -> (n - m) mod m = n mod m.
+Proof.
+    intros. destruct H as [H1 H2 ]. induction n.
+      rewrite Nat.mod_0_l by omega. rewrite Nat.mod_0_l; omega.
+
+  admit.
 Qed.
 
 Theorem ggT_impl : forall n m : nat, n >= m -> eggT n m = eggT (n - m) m.
 Proof.
-  intros; induction m.
-    rewrite <- Minus.minus_n_O; reflexivity. 
-    
-    admit.
+  intros. assert ( H0 : n =  m \/ n >  m) by omega. destruct H0 as [H01 | H02].
+      rewrite H01. rewrite ggT_same by omega; rewrite Nat.sub_diag; trivial.
+      clear H. assert(n - m <> 0) by omega. induction m.
+        rewrite Nat.sub_0_r; trivial.
+        rewrite ggT_kom. rewrite eggT_equation.
+        symmetry. rewrite ggT_kom. rewrite eggT_equation.
+        rewrite mod_minus by omega. trivial.
 Qed.
 
 
