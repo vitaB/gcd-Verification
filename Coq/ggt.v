@@ -21,11 +21,6 @@ Proof.
    assumption.
 Qed.
 
-(* ggT(n,m) = ggT(m, n)
-ggT(0,n) = n
-n >= m -> ggT(n, m) = ggT(n - m, n)
- *)
-
 Function eggT ( a b : nat) : nat :=
 match a with
    | 0 => b
@@ -52,21 +47,21 @@ Hint Resolve ggT_n_1.
 
 Lemma ggT_same : forall m n : nat, m = n -> eggT n m = n.
 Proof.
-  intros m n H; rewrite H. induction n.
+  intros m n H; rewrite H. case_eq(n).
     reflexivity.
-     rewrite eggT_equation. rewrite Nat.mod_same by omega.
+    intros. rewrite eggT_equation. rewrite Nat.mod_same by omega.
       trivial.
 Qed.
 Hint Resolve ggT_same.
 
 Lemma ggt_mod : forall n m, m > 0 -> eggT n m = eggT (n mod m) m.
 Proof.
-  induction m; intro.
+  intros; case_eq(m); intros.
     (*start with 1 not with 0*)  
     exfalso; omega.
-  assert ( H0 : n = S m \/ n < S m \/ n > S m) by omega.
-  destruct H0 as [H01 | [H02 | H03] ].
-    rewrite H01. rewrite Nat.mod_same by omega; rewrite ggT_same by omega; reflexivity.
+  assert ( H1 : n = S n0 \/ n < S n0 \/ n > S n0) by omega.
+  destruct H1 as [H11 | [H12 | H13] ].
+    rewrite H11. rewrite Nat.mod_same by omega; rewrite ggT_same by omega; reflexivity.
     rewrite Nat.mod_small; omega.
    case_eq(n); intros.
       exfalso; omega.
@@ -94,10 +89,11 @@ Qed.
 
 Theorem ggT_impl : forall n m : nat, n >= m -> eggT n m = eggT (n - m) m.
 Proof.
-  intros; case_eq(m); intros.
-    rewrite Nat.sub_0_r; trivial.
-    rewrite ggT_kom. rewrite eggT_equation.
+  intros. case_eq(m).
+    rewrite Nat.sub_0_r. trivial.
+    intros.
     symmetry. rewrite ggT_kom. rewrite eggT_equation. rewrite mod_diff.
+    symmetry. rewrite ggT_kom. rewrite eggT_equation.
       trivial.
       split.
         rewrite <- H0. exact H.
