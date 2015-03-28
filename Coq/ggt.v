@@ -3,7 +3,7 @@ Require Import Omega.
 
 Open Scope nat_scope.
 
-Lemma mod_t : forall n m k,  m > 0 -> (n + k * m) mod m = n mod m.
+Lemma mod_mult : forall n m k,  m > 0 -> (n + k * m) mod m = n mod m.
 Proof.
   induction k; intro.
     simpl. rewrite Nat.add_0_r. trivial.
@@ -15,10 +15,10 @@ Qed.
 
 Lemma mod_diff : forall n m : nat, n>=m /\ m <> 0 -> (n - m) mod m = n mod m.
 Proof. 
-  intros n m [H1 H2]. 
-  rewrite <- (Nat.mod_add _ 1). rewrite mult_1_l. rewrite Nat.sub_add. trivial.
+  intros n m [H1 H2].
+  rewrite <- mod_mult with (k := 1). rewrite mult_1_l. rewrite Nat.sub_add. trivial.
    assumption.
-   assumption.
+   omega.
 Qed.
 
 Function ggT ( a b : nat) : nat :=
