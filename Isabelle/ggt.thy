@@ -6,7 +6,7 @@ fun ggt :: "nat \<Rightarrow> nat \<Rightarrow> nat" where
   "ggt 0 m = m"
   | "ggt n m = ggt(m mod n) n"
 
-lemma [simp]: " n = 0 \<Longrightarrow> ggt 0 m = m" by simp
+lemma [simp]: " n = 0 \<Longrightarrow> ggt n m = m" by simp
 lemma [simp]: "n \<noteq> 0 \<Longrightarrow> ggt n m = ggt (m mod n) n"
   apply (case_tac n)
   apply (auto)
