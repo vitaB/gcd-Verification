@@ -1,0 +1,636 @@
+\documentclass[a4paper]{article}
+
+\usepackage{latexsym,a4wide,logicdefs,amssymb}
+
+\parindent0cm
+\pagestyle{myheadings}
+\markright{Exp-04}
+
+\begin{document}
+\raggedright
+              
+
+
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\input{Exp-04-tree}
+\end{center}
+\end{minipage}
+
+\vspace{5ex}
+
+{\Huge Exp-04}
+
+\vspace{5ex}
+
+ \Fol \Do ggT\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{1}
+
+\begin{itemize}
+\item proofsteps: 77
+\item interactions: 69
+\item automation: 10.3 \%
+\item used lemmas: decl 
+\item used simplifier rules:
+ \Fol m $<$ n \Imp m % n = m
+
+$<$
+
+n $\neq$ 0 \Fol \Not n $<$ m % n
+
+n $\neq$ 0 \Fol m % n $<$ n
+
+ \Fol m $<$ n \Imp n $\neq$ 0
+
+ \Fol m $<$ n \Imp n $\neq$ 0 (forward)
+
+ \Fol m $<$ n \And m = \Var{n}{0} \Imp \Var{n}{0} $<$ n (forward)
+
+ \Fol m $<$ n \Imp \Not n $<$ m
+
+ \Fol 0 $<$ m \Equiv m $\neq$ 0
+
+ \Fol \Not m $<$ 0
+
+ \Fol m $\le$ m
+
+ \Fol m % n = 0 \And n % \Var{n}{0} = 0 \And n $\neq$ 0 \And \Var{n}{0} $\neq$ 0 \Imp m % \Var{n}{0} = 0
+
+n $\neq$ 0 \Fol m % n $\le$ n
+
+ \Fol \Not m $<$ n \Equiv n $\le$ m
+
+ \Fol m $\le$ n \Imp (n $\le$ m \Equiv m = n)
+
+n $\neq$ 0 \Fol n % n = 0
+
+ \Fol m $>$ n \Equiv n $<$ m
+
+ \Fol m $\le$ n \Imp (n $<$ m \Equiv (false))
+
+ \Fol 0 $\le$ m
+
+
+
+               \end{itemize}
+
+
+
+\vspace{3ex}\rule{1\textwidth}{1mm}
+
+
+1) Interactive: call right  1\\
+ \Fol \Do ggT\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$2) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+3)  (from 1) Interactive: if right  1\\
+\Fol \Do {\bf if} n $>$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} n $\neq$ 0 {\bf then} {\bf if} m % n = 0 {\bf then} \Var{m}{1} := n {\bf else} ggT {\bf else} \Var{m}{1} := m\Dc
+\Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+4) Interactive: call right  1\\
+n $>$ m \Fol \Do ggT\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$5) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+6)  (from 4) Interactive: if negative right  1\\
+\tabf n $>$ m \\
+\Fol \Do {\bf if} m $>$ n {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m $\neq$ 0 {\bf then} {\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := n\Dc
+\Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+7) Interactive: if right  1\\
+\tabf n $>$ m \\
+\Fol \Do {\bf if} m $\neq$ 0 {\bf then} {\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := n\Dc
+\Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+8) Interactive: if right  1\\
+n $>$ m, m $\neq$ 0 \Fol \Do 
+{\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+9) Interactive: assign right  1\\
+n $>$ m, m $\neq$ 0, n % m = 0 \Fol \Do \Var{m}{0} := m\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+10) Interactive: call right  1\\
+n $>$ m, m $\neq$ 0, n % m = 0 \Fol \Do ggT\Dc m = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$11) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+12)  (from 10) Interactive: if negative right  1\\
+\tabf n $>$ m, m $\neq$ 0, n % m = 0 \\
+\Fol \Do {\bf if} m $>$ n {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m $\neq$ 0 {\bf then} {\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := n\Dc
+m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+13) Interactive: if positive right  1\\
+\tabf n $>$ m, m $\neq$ 0, n % m = 0 \\
+\Fol \Do 
+{\bf if} m $\neq$ 0 {\bf then} 
+{\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := n\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+14) Interactive: if positive right  1\\
+n $>$ m, m $\neq$ 0, n % m = 0 \Fol \Do 
+{\bf if} n % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+15) Interactive: assign right  1\\
+n $>$ m, m $\neq$ 0, n % m = 0 \Fol \Do \Var{m}{0} := m\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+16)  (from 8) Interactive: split right  1\\
+n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \Fol \Do ggT\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+17) Interactive: induction  for n\\
+n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+18) Interactive: call right  1\\
+Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$19) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+20)  (from 18) Interactive: if negative right  1\\
+\tabf Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \\
+\Fol \Do {\bf if} n % m $>$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} n % m $\neq$ 0 {\bf then} {\bf if} m % n % m = 0 {\bf then} \Var{m}{0} := n % m {\bf else} ggT \\
+ \tabf \tabudo{\bf else} \Var{m}{0} := m\Dc
+(true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+21) Interactive: if positive right  1\\
+\tabf Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \\
+\Fol \Do {\bf if} n % m $\neq$ 0 {\bf then} {\bf if} m % n % m = 0 {\bf then} \Var{m}{0} := n % m {\bf else} ggT \\
+ \tabf \tabudo{\bf else} \Var{m}{0} := m\Dc
+(true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+22) Interactive: if right  1\\
+\tabf Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \\
+\Fol \Do 
+{\bf if} m % n % m = 0 {\bf then} \Var{m}{0} := n % m {\bf else} ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+23) Interactive: assign right  1\\
+Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0, m % n % m = 0 \Fol \Do \Var{m}{0} := n % m\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+24)  (from 22) Interactive: apply induction  with \Var{n}{0} $\leftarrow$ m, m $\leftarrow$ n % m\\
+Ind-Hyp, n $>$ m, m $\neq$ 0, n % m $\neq$ 0, m % n % m $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+25)  (from 16) Interactive: call right  1\\
+\Do ggT\Dc \Var{m}{0} = \Var{m}{1}, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \Fol \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$26) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+27)  (from 25) Interactive: assign right  1\\
+\tabf \Do ggT\Dc \Var{m}{0} = \Var{m}{1}, n $>$ m, m $\neq$ 0, n % m $\neq$ 0 \\
+\Fol \Do \Var{n}{1} := m, \Var{n}{0} := n\Dc
+\Do {\bf if} \Var{n}{1} $>$ \Var{n}{0} {\bf then} ggT \\
+ \tabf \tabudo\tab{\Var{n}{1} := m, \Var{n}{0} := n}\tabudc\tabudo{\bf else} {\bf if} \Var{n}{1} $\neq$ 0 {\bf then} {\bf if} \Var{n}{0} % \Var{n}{1} = 0 {\bf then} m := \Var{n}{1} {\bf else} ggT {\bf else} m := \Var{n}{0}\Dc
+\Var{m}{1} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+28) Interactive: simplifier \\
+\tabf \Do ggT\Dc \Var{m}{0} = \Var{m}{1}, n $>$ m, m $\neq$ 0, n % m $\neq$ 0, \Var{n}{2} = m \And \Var{n}{3} = n \\
+\Fol \Do {\bf if} \Var{n}{2} $>$ \Var{n}{3} {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} \Var{n}{2} $\neq$ 0 {\bf then} {\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := \Var{n}{3}\Dc
+\Var{m}{1} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+29) Interactive: execute call  (1,1)\\
+\Do ggT\Dc \Var{m}{0} = \Var{m}{1}, n % m $\neq$ 0, m $\neq$ 0, m $<$ n \Fol \Do ggT\Dc \Var{m}{1} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+30)  (from 7) Interactive: simplifier \\
+n $>$ m, \Not m $\neq$ 0 \Fol \Do \Var{m}{0} := n\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+31) Interactive: assign right  1\\
+n $\neq$ 0 \Fol \Do \Var{m}{0} := n\Dc \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+32) Interactive: call right  1\\
+n $\neq$ 0 \Fol \Do ggT\Dc n = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$33) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+34)  (from 32) Interactive: if negative right  1\\
+\tabf n $\neq$ 0 \\
+\Fol \Do {\bf if} 0 $>$ n {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} 0 $\neq$ 0 {\bf then} {\bf if} n % 0 = 0 {\bf then} m := 0 {\bf else} ggT {\bf else} m := n\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+35) Interactive: if negative right  1\\
+n $\neq$ 0 \Fol \Do 
+{\bf if} 0 $\neq$ 0 {\bf then} 
+{\bf if} n % 0 = 0 {\bf then} m := 0 {\bf else} ggT {\bf else} m := n\Dc n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+36) Interactive: assign right  1\\
+n $\neq$ 0 \Fol \Do m := n\Dc n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+37)  (from 3) Interactive: simplifier \\
+\tabf \Not n $>$ m \\
+\Fol \Do {\bf if} n $\neq$ 0 {\bf then} {\bf if} m % n = 0 {\bf then} \Var{m}{1} := n {\bf else} ggT {\bf else} \Var{m}{1} := m\Dc
+\Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+38) Interactive: if right  1\\
+\tabf n $\le$ m \\
+\Fol \Do {\bf if} n $\neq$ 0 {\bf then} {\bf if} m % n = 0 {\bf then} \Var{m}{1} := n {\bf else} ggT {\bf else} \Var{m}{1} := m\Dc
+\Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+39) Interactive: if right  1\\
+n $\le$ m, n $\neq$ 0 \Fol \Do 
+{\bf if} m % n = 0 {\bf then} \Var{m}{1} := n {\bf else} ggT\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+40) Interactive: assign right  1\\
+n $\le$ m, n $\neq$ 0, m % n = 0 \Fol \Do \Var{m}{1} := n\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+41) Interactive: call right  1\\
+n $\le$ m, n $\neq$ 0, m % n = 0 \Fol \Do ggT\Dc n = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$42) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+43)  (from 41) Interactive: assign right  1\\
+\tabf n $\le$ m, n $\neq$ 0, m % n = 0 \\
+\Fol \Do \Var{n}{1} := m, \Var{n}{0} := n\Dc
+\Do {\bf if} \Var{n}{1} $>$ \Var{n}{0} {\bf then} ggT \\
+ \tabf \tabudo\tab{\Var{n}{1} := m, \Var{n}{0} := n}\tabudc\tabudo{\bf else} {\bf if} \Var{n}{1} $\neq$ 0 {\bf then} {\bf if} \Var{n}{0} % \Var{n}{1} = 0 {\bf then} m := \Var{n}{1} {\bf else} ggT {\bf else} m := \Var{n}{0}\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+44) Interactive: simplifier \\
+\tabf n $\le$ m, n $\neq$ 0, m % n = 0, \Var{n}{2} = m \And \Var{n}{3} = n \\
+\Fol \Do {\bf if} \Var{n}{2} $>$ \Var{n}{3} {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} \Var{n}{2} $\neq$ 0 {\bf then} {\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := \Var{n}{3}\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+45) Interactive: insert equation \\
+\tabf m % n = 0, \Var{n}{2} = m, n $\neq$ 0, n $\le$ m \\
+\Fol \Do {\bf if} n $<$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m $\neq$ 0 {\bf then} {\bf if} n % m = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := n\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+46) Interactive: if right  1\\
+\tabf m % n = 0, n $\neq$ 0, n $\le$ m \\
+\Fol \Do {\bf if} n $<$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m $\neq$ 0 {\bf then} \{\Var{n}{2} := m; {\bf if} n % m = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT\} {\bf else} m := n\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+47) Interactive: call right  1\\
+m % n = 0, n $\neq$ 0, n $\le$ m, n $<$ m \Fol \Do ggT\Dc n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$48) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+49)  (from 47) Interactive: if negative right  1\\
+\tabf m % n = 0, n $\neq$ 0, n $\le$ m, n $<$ m \\
+\Fol \Do {\bf if} n $>$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} n $\neq$ 0 {\bf then} {\bf if} m % n = 0 {\bf then} \Var{m}{0} := n {\bf else} ggT {\bf else} \Var{m}{0} := m\Dc
+n = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+50) Interactive: if positive right  1\\
+\tabf m % n = 0, n $\neq$ 0, n $\le$ m, n $<$ m \\
+\Fol \Do 
+{\bf if} n $\neq$ 0 {\bf then} 
+{\bf if} m % n = 0 {\bf then} \Var{m}{0} := n {\bf else} ggT {\bf else} \Var{m}{0} := m\Dc n = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+51) Interactive: if positive right  1\\
+m % n = 0, n $\neq$ 0, n $\le$ m, n $<$ m \Fol \Do 
+{\bf if} m % n = 0 {\bf then} \Var{m}{0} := n {\bf else} ggT\Dc n = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+52) Interactive: assign right  1\\
+m % n = 0, n $\neq$ 0, n $\le$ m, n $<$ m \Fol \Do \Var{m}{0} := n\Dc n = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+53)  (from 46) Interactive: simplifier \\
+\tabf m % n = 0, n $\neq$ 0, n $\le$ m, \Not n $<$ m \\
+\Fol \Do {\bf if} m $\neq$ 0 {\bf then} \{\Var{n}{2} := m; {\bf if} n % m = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT\} {\bf else} m := n\Dc
+n = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+54) Interactive: assign right  1\\
+m $\neq$ 0 \Fol \Do \Var{n}{2} := m\Dc \Do \Var{m}{0} := \Var{n}{2}\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+55) Interactive: assign right  1\\
+m $\neq$ 0 \Fol \Do \Var{m}{0} := m\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+56)  (from 39) Interactive: split right  1\\
+n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \Fol \Do ggT\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+57) induction: induction  for m\\
+n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+58) induction: call right  1\\
+Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$59) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+60)  (from 58) symbolic execution: if negative right  1\\
+\tabf Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \\
+\Fol \Do {\bf if} m % n $>$ n {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m % n $\neq$ 0 {\bf then} {\bf if} n % m % n = 0 {\bf then} \Var{m}{0} := m % n {\bf else} ggT \\
+ \tabf \tabudo{\bf else} m := n\Dc
+(true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+61) symbolic execution: if positive right  1\\
+\tabf Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \\
+\Fol \Do {\bf if} m % n $\neq$ 0 {\bf then} {\bf if} n % m % n = 0 {\bf then} \Var{m}{0} := m % n {\bf else} ggT \\
+ \tabf \tabudo{\bf else} m := n\Dc
+(true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+62) conditional right split: if right  1\\
+\tabf Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \\
+\Fol \Do 
+{\bf if} n % m % n = 0 {\bf then} \Var{m}{0} := m % n {\bf else} ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+63) symbolic execution: assign right \\
+Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0, n % m % n = 0 \Fol \Do \Var{m}{0} := m % n\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+64)  (from 62) apply ind once: apply induction  with n $\leftarrow$ m % n, \Var{m}{2} $\leftarrow$ n\\
+Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0, n % m % n $\neq$ 0 \Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+65) contract and execute: execute call  (1,1)\\
+\tabf \Do ggT\Dc (true), Ind-Hyp, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0, n % m % n $\neq$ 0 \\
+\Fol \Do ggT\Dc (true)
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+66)  (from 56) Interactive: call right  1\\
+\Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \Fol \Do ggT\Dc \Var{m}{0} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$67) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+68)  (from 66) Interactive: assign right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0 \\
+\Fol \Do \Var{n}{1} := m, \Var{n}{0} := n\Dc
+\Do {\bf if} \Var{n}{1} $>$ \Var{n}{0} {\bf then} ggT \\
+ \tabf \tabudo\tab{\Var{n}{1} := m, \Var{n}{0} := n}\tabudc\tabudo{\bf else} {\bf if} \Var{n}{1} $\neq$ 0 {\bf then} {\bf if} \Var{n}{0} % \Var{n}{1} = 0 {\bf then} m := \Var{n}{1} {\bf else} ggT {\bf else} m := \Var{n}{0}\Dc
+\Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+69) Interactive: if positive right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0, \Var{n}{2} = m \And \Var{n}{3} = n \\
+\Fol \Do {\bf if} \Var{n}{2} $>$ \Var{n}{3} {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} \Var{n}{2} $\neq$ 0 {\bf then} {\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := \Var{n}{3}\Dc
+\Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+70) Interactive: simplifier \\
+\Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\le$ m, n $\neq$ 0, m % n $\neq$ 0, \Var{n}{2} = m \And \Var{n}{3} = n \Fol \Do ggT\Dc \Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+71) Interactive: call right  1\\
+\Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m \Fol \Do ggT\Dc \Var{m}{0} = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$72) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+73)  (from 71) Interactive: assign right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m \\
+\Fol \Do \Var{n}{1} := n, \Var{n}{0} := m\Dc
+\Do {\bf if} \Var{n}{1} $>$ \Var{n}{0} {\bf then} ggT \\
+ \tabf \tabudo\tab{\Var{n}{1} := n, \Var{n}{0} := m}\tabudc\tabudo{\bf else} {\bf if} \Var{n}{1} $\neq$ 0 {\bf then} {\bf if} \Var{n}{0} % \Var{n}{1} = 0 {\bf then} m := \Var{n}{1} {\bf else} ggT {\bf else} m := \Var{n}{0}\Dc
+\Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+74) Interactive: if negative right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m, \Var{n}{2} = n \And \Var{n}{3} = m \\
+\Fol \Do {\bf if} \Var{n}{2} $>$ \Var{n}{3} {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} \Var{n}{2} $\neq$ 0 {\bf then} {\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := \Var{n}{3}\Dc
+\Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+75) Interactive: if positive right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m, \Var{n}{2} = n \And \Var{n}{3} = m \\
+\Fol \Do {\bf if} \Var{n}{2} $\neq$ 0 {\bf then} {\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT {\bf else} m := \Var{n}{3}\Dc
+\Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+76) Interactive: if negative right  1\\
+\tabf \Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m, \Var{n}{2} = n \And \Var{n}{3} = m \\
+\Fol \Do 
+{\bf if} \Var{n}{3} % \Var{n}{2} = 0 {\bf then} m := \Var{n}{2} {\bf else} ggT\Dc \Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+77) Interactive: simplifier \\
+\Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m, \Var{n}{2} = n \And \Var{n}{3} = m \Fol \Do ggT\Dc \Var{m}{0} = m
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+78) Interactive: execute call  (1,1)\\
+\Do ggT\Dc \Var{m}{1} = \Var{m}{0}, n $\neq$ 0, m % n $\neq$ 0, n $\le$ m \Fol \Do ggT\Dc \Var{m}{0} = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+79)  (from 38) Interactive: simplifier \\
+n $\le$ m, \Not n $\neq$ 0 \Fol \Do \Var{m}{1} := m\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+80) Interactive: assign right  1\\
+ \Fol \Do \Var{m}{1} := m\Dc \Do ggT\Dc \Var{m}{1} = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+81) Interactive: call right  1\\
+ \Fol \Do ggT\Dc m = \Var{m}{2}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$82) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+83)  (from 81) Interactive: if right  1\\
+\Fol \Do {\bf if} m $>$ 0 {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} m $\neq$ 0 {\bf then} {\bf if} 0 % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := 0\Dc
+m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+84) Interactive: call right  1\\
+m $>$ 0 \Fol \Do ggT\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$85) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+86)  (from 84) Interactive: if negative right  1\\
+\tabf m $>$ 0 \\
+\Fol \Do {\bf if} 0 $>$ m {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} 0 $\neq$ 0 {\bf then} {\bf if} m % 0 = 0 {\bf then} \Var{m}{1} := 0 {\bf else} ggT {\bf else} \Var{m}{1} := m\Dc
+m = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+87) Interactive: if negative right  1\\
+m $>$ 0 \Fol \Do 
+{\bf if} 0 $\neq$ 0 {\bf then} 
+{\bf if} m % 0 = 0 {\bf then} \Var{m}{1} := 0 {\bf else} ggT {\bf else} \Var{m}{1} := m\Dc m = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+88) Interactive: assign right  1\\
+m $>$ 0 \Fol \Do \Var{m}{1} := m\Dc m = \Var{m}{1}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+89)  (from 83) Interactive: simplifier \\
+\tabf \Not m $>$ 0 \\
+\Fol \Do 
+{\bf if} m $\neq$ 0 {\bf then} 
+{\bf if} 0 % m = 0 {\bf then} \Var{m}{0} := m {\bf else} ggT {\bf else} \Var{m}{0} := 0\Dc m = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+90) Interactive: assign right  1\\
+ \Fol \Do \Var{m}{0} := 0\Dc 0 = \Var{m}{0}
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+
+
+\end{document}
+

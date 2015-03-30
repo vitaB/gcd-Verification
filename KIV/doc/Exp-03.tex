@@ -1,0 +1,113 @@
+\documentclass[a4paper]{article}
+
+\usepackage{latexsym,a4wide,logicdefs,amssymb}
+
+\parindent0cm
+\pagestyle{myheadings}
+\markright{Exp-03}
+
+\begin{document}
+\raggedright
+              
+
+
+
+\begin{minipage}{\textwidth}
+\begin{center}
+\input{Exp-03-tree}
+\end{center}
+\end{minipage}
+
+\vspace{5ex}
+
+{\Huge Exp-03}
+
+\vspace{5ex}
+
+ \Fol \Do ggT\Dc m = n
+
+\begin{itemize}
+\item proofsteps: 8
+\item interactions: 8
+\item automation: 0.0 \%
+\item used lemmas: decl 
+\item used simplifier rules:
+ \Fol \Not m $<$ 0
+
+ \Fol 0 $<$ m \Equiv m $\neq$ 0
+
+ \Fol m $>$ n \Equiv n $<$ m
+
+
+
+               \end{itemize}
+
+
+
+\vspace{3ex}\rule{1\textwidth}{1mm}
+
+
+1) Interactive: call right  1\\
+ \Fol \Do ggT\Dc m = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$2) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+3)  (from 1) Interactive: if right  1\\
+\Fol \Do {\bf if} n $>$ 0 {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} n $\neq$ 0 {\bf then} {\bf if} 0 % n = 0 {\bf then} \Var{m}{0} := n {\bf else} ggT {\bf else} \Var{m}{0} := 0\Dc
+\Var{m}{0} = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+4) Interactive: call right  1\\
+n $>$ 0 \Fol \Do ggT\Dc \Var{m}{0} = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+$\bullet$5) lemma decl \\
+ \Fol 
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+6)  (from 4) Interactive: if negative right  1\\
+\tabf n $>$ 0 \\
+\Fol \Do {\bf if} 0 $>$ n {\bf then} ggT \\
+ \tabf \tabudo{\bf else} {\bf if} 0 $\neq$ 0 {\bf then} {\bf if} n % 0 = 0 {\bf then} m := 0 {\bf else} ggT {\bf else} m := n\Dc
+m = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+7) Interactive: if negative right  1\\
+n $>$ 0 \Fol \Do 
+{\bf if} 0 $\neq$ 0 {\bf then} 
+{\bf if} n % 0 = 0 {\bf then} m := 0 {\bf else} ggT {\bf else} m := n\Dc m = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+8) Interactive: assign right  1\\
+n $>$ 0 \Fol \Do m := n\Dc m = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+9)  (from 3) Interactive: simplifier \\
+\tabf \Not n $>$ 0 \\
+\Fol \Do 
+{\bf if} n $\neq$ 0 {\bf then} 
+{\bf if} 0 % n = 0 {\bf then} \Var{m}{0} := n {\bf else} ggT {\bf else} \Var{m}{0} := 0\Dc \Var{m}{0} = n
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+10) Interactive: assign right  1\\
+ \Fol \Do \Var{m}{0} := 0\Dc \Var{m}{0} = 0
+
+\vspace{-1.5ex}\_\hrulefill \_
+
+
+
+\end{document}
+
