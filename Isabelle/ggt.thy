@@ -42,13 +42,16 @@ done
 theorem ggt_impl : "n \<ge> m \<longrightarrow> ggt n m = ggt(n - m) m"
   apply (case_tac m)
   apply (simp)
-  using ggt_kom
-  apply (rule ssubst)
-  apply (auto)
-  using le_mod_geq
-  apply (rule subst)
-  apply (auto)
-  (*noch nicht fertig*)
+  apply (subst ggt_kom)
+  apply (simp)
+  apply (rule impI)
+  apply (subst (2) ggt_kom)
+  apply (simp)
+  apply (cut_tac n="Suc nat" and m ="n" in  le_mod_geq)
+  apply (assumption)
+  apply (simp)
+done
+
 end
 
 
